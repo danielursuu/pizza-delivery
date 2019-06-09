@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PizzaDeliveryAPI.Data;
 
 namespace PizzaDeliveryAPI.Migrations
@@ -29,7 +28,7 @@ namespace PizzaDeliveryAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pizzas");
+                    b.ToTable("Pizza");
                 });
 #pragma warning restore 612, 618
         }

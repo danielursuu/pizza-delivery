@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PizzaDeliveryAPI.Data;
@@ -11,23 +9,23 @@ namespace PizzaDeliveryAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PizzasController : ControllerBase
+    public class PizzaController : ControllerBase
     {
         private readonly PizzaContext _context;
 
-        public PizzasController(PizzaContext context)
+        public PizzaController(PizzaContext context)
         {
             _context = context;
         }
 
-        // GET: api/Pizzas
+        // GET: api/Pizza
         [HttpGet]
-        public IEnumerable<Pizza> GetPizzas()
+        public IEnumerable<Pizza> GetPizza()
         {
-            return _context.Pizzas;
+            return _context.Pizza;
         }
 
-        // GET: api/Pizzas/5
+        // GET: api/Pizza/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPizza([FromRoute] int id)
         {
@@ -36,7 +34,7 @@ namespace PizzaDeliveryAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var pizza = await _context.Pizzas.FindAsync(id);
+            var pizza = await _context.Pizza.FindAsync(id);
 
             if (pizza == null)
             {
@@ -46,7 +44,7 @@ namespace PizzaDeliveryAPI.Controllers
             return Ok(pizza);
         }
 
-        // PUT: api/Pizzas/5
+        // PUT: api/Pizza/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPizza([FromRoute] int id, [FromBody] Pizza pizza)
         {
@@ -81,7 +79,7 @@ namespace PizzaDeliveryAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Pizzas
+        // POST: api/Pizza
         [HttpPost]
         public async Task<IActionResult> PostPizza([FromBody] Pizza pizza)
         {
@@ -90,13 +88,13 @@ namespace PizzaDeliveryAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.Pizzas.Add(pizza);
+            _context.Pizza.Add(pizza);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPizza", new { id = pizza.Id }, pizza);
+            return CreatedAtAction("GetPizza", new { id = pizza.Id}, pizza);
         }
 
-        // DELETE: api/Pizzas/5
+        // DELETE: api/Pizza/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePizza([FromRoute] int id)
         {
@@ -105,13 +103,13 @@ namespace PizzaDeliveryAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var pizza = await _context.Pizzas.FindAsync(id);
+            var pizza = await _context.Pizza.FindAsync(id);
             if (pizza == null)
             {
                 return NotFound();
             }
 
-            _context.Pizzas.Remove(pizza);
+            _context.Pizza.Remove(pizza);
             await _context.SaveChangesAsync();
 
             return Ok(pizza);
@@ -119,7 +117,7 @@ namespace PizzaDeliveryAPI.Controllers
 
         private bool PizzaExists(int id)
         {
-            return _context.Pizzas.Any(e => e.Id == id);
+            return _context.Pizza.Any(e => e.Id == id);
         }
     }
 }
