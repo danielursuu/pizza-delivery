@@ -31,7 +31,7 @@ namespace PizzaDeliveryAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pizzas");
+                    b.ToTable("Pizza");
                 });
 #pragma warning restore 612, 618
         }

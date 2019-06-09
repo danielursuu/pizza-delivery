@@ -10,6 +10,6 @@ namespace PizzaDeliveryAPI.Data
 
         }
 
-        public DbSet<Pizza> Pizzas { get; set; }
+        public DbSet<Pizza> Pizza { get; set; }
     }
 }
